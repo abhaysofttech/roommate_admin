@@ -1,0 +1,7 @@
+.main-panel {
+    position: relative;
+    float: right;
+    width: calc(100% - 260px);
+    background-color: #f4f3ef;
+    transition: all .5s cubic-bezier(.685,.0473,.346,1);
+}
