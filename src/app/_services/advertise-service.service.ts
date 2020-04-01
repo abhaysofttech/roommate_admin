@@ -13,4 +13,12 @@ export class AdvertiseService {
   getRoomMateAds() {
     return this.http.get(`${SERVER_URL}/postads`);
   }
+
+  getAdsDetails(adId) {
+    return this.http.get(`${SERVER_URL}/postads/${adId}`);
+}
+updateAds(id: string, status: string) {
+  return this.http.put(`${SERVER_URL}/postads/updateads/${id}`, {adsStatus: status});
+
+}
 }

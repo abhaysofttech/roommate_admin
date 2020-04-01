@@ -22,14 +22,17 @@ closed:any = [];
       (res: any) => {
         console.log(res);
         this.pending = res.filter(data => {return data.adsStatus == 'pending'}).map(data => {return data})
+        this.active = res.filter(data => {return data.adsStatus == 'active'}).map(data => {return data})
+        this.closed = res.filter(data => {return data.adsStatus == 'closed'}).map(data => {return data})
     // this.tracks = this.serviceType.filter(x => { return x.serviceType == param; }).map(data => { return data });
 
       })
   }
 
   viewAdvertise(){
+    debugger
     let navigationExtras: NavigationExtras = { state: { ads: this.pending } };
-    this.router.navigate(['/pages/advertise/advertisement'], navigationExtras);
+    this.router.navigate(['/pages/advertisement'], navigationExtras);
   }
 
 }

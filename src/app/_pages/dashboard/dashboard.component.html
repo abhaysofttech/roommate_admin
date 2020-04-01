@@ -1,44 +1,129 @@
-<div class="row no-margin">
-  <div class="col-12">
+
+
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/pages"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="no-padding">
+      <img class="rm_header_logo" src="../../../assets/images/roommate_logo.svg" />
+      <span class="tab-title">Advertisement</span>
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="ionRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="main-container full-height">
     <div class="row no-margin">
-      <div class="col-2">
-        <!-- <h5>{{pending?.length > 0 ? pending?.length : 0}}</h5> -->
-        <div class="card card-stats">
-          <div class="card-body ">
-            <div class="row">
-              <div class="col-5 col-md-4">
-                <div class="icon-big text-center icon-warning">
-                  <i class="nc-icon nc-globe text-warning"></i>
+      <div class="col-12">
+        <div class="row no-margin">
+          <div class="col-lg-2 col-12">
+            <!-- <h5>{{pending?.length > 0 ? pending?.length : 0}}</h5> -->
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-globe text-warning"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category no-margin">Pending</p>
+                      <p class="card-title no-margin">{{pending?.length > 0 ? pending?.length : 0}} </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="col-7 col-md-8">
-                <div class="numbers">
-                  <p class="card-category no-margin">Pending</p>
-                  <p class="card-title no-margin">{{pending?.length > 0 ? pending?.length : 0}} </p>
+              <div class="card-footer " (click)="viewAdvertise()">
+                <hr><div class="stats">
+                  <i class="fa fa-refresh"></i> Update Now </div>
                 </div>
               </div>
-            </div>
           </div>
-          <div class="card-footer ">
-            <hr><div class="stats">
-              <i class="fa fa-refresh"></i> Update Now </div>
-            </div>
+          <div class="col-lg-2 col-12">
+            <!-- <h5>{{pending?.length > 0 ? pending?.length : 0}}</h5> -->
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-globe text-warning"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category no-margin">Active</p>
+                      <p class="card-title no-margin">{{active?.length > 0 ? active?.length : 0}} </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr><div class="stats">
+                  <i class="fa fa-refresh"></i> Update Now </div>
+                </div>
+              </div>
           </div>
-      </div>
-      <div class="col-3">
-        <h5>{{active?.length > 0 ? 0 : active?.length }}</h5>
+          <div class="col-lg-2 col-12">
+            <!-- <h5>{{pending?.length > 0 ? pending?.length : 0}}</h5> -->
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-globe text-warning"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category no-margin">Closed</p>
+                      <p class="card-title no-margin">{{closed?.length > 0 ? closed?.length : 0}} </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr><div class="stats">
+                  <i class="fa fa-refresh"></i> Update Now </div>
+                </div>
+              </div>
+          </div>
+          <div class="col-lg-2 col-12">
+            <!-- <h5>{{pending?.length > 0 ? pending?.length : 0}}</h5> -->
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-globe text-warning"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category no-margin">Pending</p>
+                      <p class="card-title no-margin">{{pending?.length > 0 ? pending?.length : 0}} </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr><div class="stats">
+                  <i class="fa fa-refresh"></i> Update Now </div>
+                </div>
+              </div>
+          </div>
+      
+    
+        </div>
     
       </div>
-      <div class="col-3">
-        <h5>{{closed?.length}}</h5>
-    
-      </div>
-      <div class="col-3">
-        <h5>{{closed?.length}}</h5>
-    
-      </div>
-
     </div>
-
   </div>
-</div>
+</ion-content>

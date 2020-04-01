@@ -3,13 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
 import { AdvertisementComponent } from './advertisement/advertisement.component';
+import { AdvertisementDetailsComponent } from './advertisement-details/advertisement-details.component';
 
 const routes: Routes = [
     {
-        path: '', component: PagesComponent,
+        path: '', component: DashboardComponent,
         children: [
-            { path: 'dashboard', component: DashboardComponent },
-            { path: 'advertisement', component: AdvertisementComponent }
+            // { path: '', component: DashboardComponent },
+            { path: 'advertisement', component: AdvertisementComponent },
+            { path: 'advertisementDetails/:id', component: AdvertisementDetailsComponent },
+            
         ]
     }
 ]

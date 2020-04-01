@@ -1,3 +1,67 @@
-<p>
-  advertisement works!
-</p>
+<div class="row no-margin search-container">
+  <ng-container *ngIf="Ads">
+
+  <div class="col-3 container-padding" *ngFor="let ads of Ads | orderBy:'-postdate'">
+
+      <div class="card" >
+        <div class="card-body no-padding" [routerLink]="['/pages/advertisementDetails', ads.id]">
+          <ion-slides pager="true" [options]="slideOpts">
+            <div class="photosCount" *ngIf="ads.images.length == 0"><span><i
+                  class="fa fa-camera"></i>{{ads.images.length}}</span></div>
+            <ion-slide *ngIf="ads.images.length == 0">
+              <img src="../../../../assets/images/image-not-available.jpg">
+            </ion-slide>
+            <ion-slide *ngIf="ads.images.length > 0">
+              <img src='https://aklogical.com/api{{ads.images[0].path}}'>
+            </ion-slide>
+          </ion-slides>
+          <div class="adsDetails">
+            <div class="adsOwner"><span>{{ads.username}},</span><span class="age"> {{ads.dob | age:ads.dob}} |
+              </span><span class="gender">
+                <i class="fa" aria-hidden="true"
+                  [ngClass]="{ 'fa-male': ads.userGender === 'Male', 'fa-female':  ads.userGender === 'Female'}"></i></span>
+            </div>
+            <div class="profilePicOwner" *ngIf="ads.profileimages.length > 0"
+              [ngStyle]="{'background-image': 'url(https://aklogical.com/api/profileImage/'+ads.profileimages[0].profileId+''+ads.profileimages[0].mimeType+')'}">
+              <i class="fa fa-check-circle" aria-hidden="true"></i>
+            </div>
+            <div class="profilePicOwner" *ngIf="ads.profileimages.length == 0"
+              [ngStyle]="{'background-image': 'url(../../../../assets/images/user.png)'}">
+              <i class="fa fa-check-circle" aria-hidden="true"></i>
+            </div>
+            <div class="rentDetails"><span class="rupees_icon"><i class="fa fa-inr" aria-hidden="true"></i>
+              </span><span class="amount"> {{ads.rentAmount}} </span><span class="month">/Month</span></div>
+            <div class="adsAddressDetails">
+              <div class="adsTitle">{{ads.roomType}} for {{ads.gender}} in {{ads.area}} {{ads.city}}</div>
+              <div class="adsAddress">{{ads.shortaddress}}</div>
+            </div>
+            <span class="knowMore">Click on ads to Know More</span>
+            <span class="postedOn">Posted on: - {{ads.postdate | date: 'dd-MMM-yyyy'}}</span>
+          </div>
+        </div>
+        <div class="card-footer contact-container">
+          <div class="row">
+            <div class="col-2 no-padding">Owner Contact</div>
+            <div class="col-7 adsContact" [ngClass]="{'blur': ads.visitedContact == false}">
+              <img src="../../../../assets/images/telephone.svg" /><span>{{ads.phonenumber}}</span>
+            </div>
+            <div class="col-3 no-padding" *ngIf="!ads.visitedContact">
+              <span class="viewContact" (click)="viewContact(ads)">
+                View
+              </span>
+            </div>
+            <div class="col-3 no-padding" *ngIf="ads.visitedContact" (click)="callJoint(ads.phonenumber)">
+              <span class="callNow">
+                Call Now
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</ng-container>
+
+  <div *ngIf="Ads == ''" class="col-12 container-padding">
+    <span>No Ads Found !.. Keep in touch..</span>
+  </div>
+</div>

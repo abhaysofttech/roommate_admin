@@ -14,23 +14,45 @@ import { FusionChartsModule } from "angular-fusioncharts";
 import * as FusionCharts from "fusioncharts";
 import * as charts from "fusioncharts/fusioncharts.charts";
 import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from './_shared/shared/shared.module';
+import { LoginComponent, LoginViaPasswordComponent } from './_auth';
+import { ActionSheetComponent } from './_auth/action-sheet/action-sheet.component';
+
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { Network } from '@ionic-native/network/ngx';
 
 // Pass the fusioncharts library and chart modules
 FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [BrowserModule, FusionChartsModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,
-    CommonModule,FormsModule,],
+  declarations: [
+    AppComponent, 
+    LoginComponent,    
+    LoginViaPasswordComponent,
+    ActionSheetComponent
+  ],
+  entryComponents: [ActionSheetComponent],
+  imports: [
+    BrowserModule, 
+    FusionChartsModule, 
+    AppRoutingModule, 
+    HttpClientModule,
+    CommonModule, 
+    FormsModule, 
+    ReactiveFormsModule,
+    SharedModule,
+    IonicModule.forRoot(),
+   ],
   providers: [
     StatusBar,
     SplashScreen,
+    ScreenOrientation,
+    Network,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

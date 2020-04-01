@@ -1,0 +1,173 @@
+<div class="row no-margin search-container">
+  <div class="col-3 container-padding">
+    <div class="card" *ngIf="Ads">
+      <div class="card-body no-padding">
+        <div class="photosCount" *ngIf="Ads.images.length == 0"><span><i
+              class="fa fa-camera"></i>{{Ads.images.length}}</span></div>
+
+        <ng-container *ngIf="Ads.images.length == 0">
+          <ion-slides pager="true" [options]="slideOpts">
+            <ion-slide>
+              <img src="../../../../assets/images/image-not-available.jpg">
+            </ion-slide>
+
+          </ion-slides>
+          <div class="reqImages" (click)="requestImage()"><span>Request for Photos</span></div>
+        </ng-container>
+
+        <ng-container *ngIf="Ads.images.length > 0">
+          <ion-slides pager="true" [options]="slideOpts" (click)="viewGallary()">
+            <ion-slide *ngFor="let images of Ads.images">
+              <img src='https://aklogical.com/api{{images.path}}'>
+            </ion-slide>
+
+          </ion-slides>
+          <div class="addImages" (click)="viewGallary()"><span>View Photos</span></div>
+        </ng-container>
+
+        <div class="adsDetails">
+          <div class="adsOwner"><span>{{Ads.username}},</span><span class="age"> {{Ads.dob | age:Ads.dob}} |
+            </span><span class="gender">
+              <i class="fa" aria-hidden="true"
+                [ngClass]="{ 'fa-male': Ads.userGender === 'Male', 'fa-female':  Ads.userGender === 'Female'}"></i></span>
+          </div>
+
+          <div class="profilePicOwner" *ngIf="Ads.profileimages.length > 0"
+            [ngStyle]="{'background-image': 'url(https://aklogical.com/api/profileImage/'+Ads.profileimages[0].profileId+''+Ads.profileimages[0].mimeType+')'}">
+            <!-- <img src="../../../../assets/images/image3.jpg"> -->
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
+          </div>
+          <div class="profilePicOwner" *ngIf="Ads.profileimages.length == 0"
+            [ngStyle]="{'background-image': 'url(../../../../assets/images/user.png)'}">
+            <!-- <img src="../../../../assets/images/image3.jpg"> -->
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
+          </div>
+          <div class="adsAddressDetails">
+            <div class="adsTitle">{{Ads.roomType}} for {{Ads.gender}} in {{Ads.area}} {{Ads.city}}</div>
+            <div class="adsAddress">{{Ads.address}}</div>
+          </div>
+          <span class="postedOn">Posted on: - {{Ads.postdate | date: 'dd-MMM-yyyy'}}</span>
+        </div>
+      </div>
+      <div class="rentDetails">
+        <div class="rentPane">
+          <span class="rentTitle">Rent</span>
+          <span class="rentAmount">
+            <span class="rupees_icon"><i class="fa fa-inr" aria-hidden="true"></i>
+            </span><span class="amount"> {{Ads.rentAmount}} </span><span class="month">/Month</span>
+          </span>
+        </div>
+
+        <div class="rentPane" style="float: right;">
+          <span class="rentTitle">Deposit</span>
+          <span class="rentAmount">
+            <span class="rupees_icon"><i class="fa fa-inr" aria-hidden="true"></i>
+            </span><span class="amount"> {{Ads.depositAmount}} </span>
+          </span>
+          <span class="negotiable">Negotiable: - {{Ads.rentNegotiable ? 'Yes':'No'}}</span>
+
+        </div>
+      </div>
+      <div class="card-footer contact-container">
+        <div class="row">
+          <div class="col-2 no-padding">Owner Contact</div>
+          <div class="col-7 adsContact" [ngClass]="{'blur': Ads.visitedContact == false}">
+            <img src="../../../../assets/images/telephone.svg" /><span>9960732614</span>
+          </div>
+          <div class="col-3 no-padding" *ngIf="!Ads.visitedContact">
+            <span class="viewContact" (click)="viewContact(Ads)">
+              View
+            </span>
+          </div>
+          <div class="col-3 no-padding" *ngIf="Ads.visitedContact" (click)="callJoint('7798567452')">
+            <span class="callNow">
+              Call Now
+            </span>
+          </div>
+        </div>
+      </div>
+    
+    </div>
+  </div>
+
+  <div class="col-3 container-padding">
+    <div class="card" *ngIf="Ads">
+      <div class="card-body no-padding">
+      <div class="adsOverview">
+        <div class="row no-margin">
+          <div class="col-12 overViewTitle"><span>Facilities</span></div>
+          <div class="col-12">
+            <div class="row no-margin serviceAme">
+              <div class="col-6"><span class="serTitle">Bathroom</span><span class="serQty">{{Ads.bathroom}}</span>
+              </div>
+              <div class="col-6"><span class="serTitle">Balcony</span><span class="serQty">{{Ads.balcony}}</span></div>
+              <div class="col-6"><span class="serTitle">Cupboards</span><span class="serQty">{{Ads.cupboard}}</span>
+              </div>
+              <div class="col-6"><span class="serTitle">Bathroom</span><span class="serQty">{{Ads.bathroom}}</span>
+              </div>
+              <div class="col-6"><span class="serTitle">Non-Veg</span><span class="serQty">{{Ads.vegNonveg}}</span>
+              </div>
+              <div class="col-6"><span class="serTitle">Cooking Facility</span><span
+                  class="serQty">{{Ads.cooking}}</span></div>
+            </div>
+          </div>
+          <div class="col-12 overViewTitle"><span>Amenities</span></div>
+          <div class="col-12">
+            <div class="row no-margin">
+              <div class="col-4 amenities-list" *ngIf="Ads.powerBackup">
+                <span><img src="../../../../assets/icon/battery.svg" /></span>
+                <span>Power Backup</span>
+              </div>
+
+              <div class="col-4 amenities-list">
+                <span><img src="../../../../assets/icon/club.svg"></span>
+                <span>Club</span>
+              </div>
+              <div class="col-4 amenities-list" *ngIf="Ads.gatedSecurity">
+                <span><img src="../../../../assets/icon/gated.svg"></span>
+                <span>Gated Socity</span>
+              </div>
+              <div class="col-4 amenities-list">
+                <span><img src="../../../../assets/icon/intercom.svg"></span>
+                <span>Intercom</span>
+              </div>
+              <div class="col-4 amenities-list" *ngIf="Ads.liftService">
+                <span><img src="../../../../assets/icon/lift.svg"></span>
+                <span>Lift</span>
+              </div>
+              <div class="col-4 amenities-list" *ngIf="Ads.sewage">
+                <span><img src="../../../../assets/icon/Sewage.svg"></span>
+                <span>Sewage</span>
+              </div>
+              <div class="col-4 amenities-list" *ngIf="Ads.swimmingPool">
+                <span><img src="../../../../assets/icon/swimming.svg"></span>
+                <span>Swimming pool</span>
+              </div>
+              <div class="col-4 amenities-list" *ngIf="Ads.carParking">
+                <span><img src="../../../../assets/icon/parking.svg"></span>
+                <span>Yes</span>
+              </div>
+              <div class="col-4 amenities-list">
+                <span><img src="../../../../assets/icon/battery.svg"></span>
+                <span>Yes</span>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+  <div class="col-3 container-padding">
+    <div class="card" *ngIf="Ads">
+      <div class="card-body no-padding">
+        <button class="aprrove-btn" (click)="approvedAds(adsId)"
+       ><i class="fa fa-telegram" aria-hidden="true"></i><span>My
+            Post</span></button>
+        </div>
+        </div>
+        </div>
+
+</div>
